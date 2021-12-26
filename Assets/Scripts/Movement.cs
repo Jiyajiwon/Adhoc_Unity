@@ -60,7 +60,6 @@ public class Movement : MonoBehaviour
         Jump();
 
     }
-
     void Run(){
 
         movement.Set(horizon, 0, vertical);
@@ -68,14 +67,12 @@ public class Movement : MonoBehaviour
         rigidbody.MovePosition(transform.position + movement);
 
     }
-
     void Jump(){
       if (!isJumping) return;
         rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         isJumping = false;
         jumpState = false;
     }
-
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")jumpState = true; 
