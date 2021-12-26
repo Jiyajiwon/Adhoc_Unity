@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     float speed = 7f; // 걷기 속도
     float runningSpeed = 11f; // 달리기 속도
     float jumpPower = 6f; // 점프파워
-    float Stamina = 100f; // 스태미나
+    float stamina = 5f; // 스태미나
 
     // Bool Statement
     bool isJumping = false; // 점프 
@@ -31,8 +31,23 @@ public class Movement : MonoBehaviour
         horizon = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.LeftShift)) speed = runningSpeed;
-        else speed = 7f;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (stamina > 0)
+            {
+                speed = runningSpeed;
+                stamina -= 1 * Time.deltaTime;
+                Debug.Log(stamina);
+            }
+            else {
+                speed = 7f;
+            }
+        }
+        else
+        {
+            speed = 7f;
+            if (stamina < 5) stamina += 1 * Time.deltaTime;
+        }
 
         if (Input.GetButtonDown("Jump")) {
             if(jumpState == true)isJumping = true;
